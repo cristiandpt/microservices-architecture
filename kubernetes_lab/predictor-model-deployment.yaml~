@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: predictor-model-deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: predictor-model
+  template:
+    metadata:
+      labels:
+        app: predictor-model
+    spec:
+      containers:
+      - name: predictor-model
+        image:  purchase-model-image:latest # Use the image you built
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 80

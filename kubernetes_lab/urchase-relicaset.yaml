@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: predictor-model-replicaset
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: predictor-model
+  template:
+    metadata:
+      labels:
+        app: predictor-model
+    spec:
+      containers:
+      - name: predictor-model
+        image: purchase-model-image:latest # Use the image you built
+        ports:
+        - containerPort: 8000
